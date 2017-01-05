@@ -2,16 +2,16 @@ var config = {
 	// store default list of presentations
 	presentations : {
 		'demo' : { // demo presentation
-			id: 'demo',  // id for each presentation, currently same as the url
+			id: 'demo',
 			title : 'Demo Presentation',
-			indexh : 0,  // initial slide horizontal index
-			indexv : 0,  // initial slide veriticlal index
+			indexh : 0,
+			indexv : 0,
 		},
-		'myppt' : { // powerpoint presentation
-			id: 'myppt', 
-			title : 'My Presentation',
-			indexh : 0,  // initial slide horizontal index
-			indexv : 0,  // initial slide veriticlal index
+		'node-introduction' : {
+			id: 'node-introduction', 
+			title : 'Node: From WTF to OMG',
+			indexh : 0,
+			indexv : 0,
 		}
 		
 	}

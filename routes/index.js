@@ -7,8 +7,8 @@ var demoPpt = function(req, res){
   res.render('demo', { title: 'Demo Presentation' })
 };
 
-var myPpt = function(req, res){
-  res.render('myppt', { title: 'My Presentation' })
+var nodeOverview = function(req, res){
+  res.render('node-wtf-to-omg', { title: 'Node: From WTF to OMG' })
 };
 
 
@@ -25,7 +25,7 @@ exports.setupRemotePresenter = function(app, io, config){
 	
 	// my presentation
 	// url is matching the id for presentations
-	app.get('/myppt', myPpt);
+	app.get('/node-introduction', nodeOverview);
 	
 	
 	app.get('/controller', controllerRoute);
