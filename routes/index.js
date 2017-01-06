@@ -64,6 +64,7 @@ exports.setupRemotePresenter = function(app, io, config){
 				}
 				else if(cmd == 'down')
 				{
+					console.log("in down")
 					curppt.indexv++;
 				}
 				else if(cmd == 'left')
@@ -82,6 +83,8 @@ exports.setupRemotePresenter = function(app, io, config){
 					curppt.indexv = 0;
 				
 				presentations[pptId] = curppt;
+
+				console.log(curppt.indexh, curppt.indexv)
 				
 				// send the new data for update
 				socket.broadcast.emit('updatedata', curppt);

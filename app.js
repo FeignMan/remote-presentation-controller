@@ -17,44 +17,37 @@ io = io.listen(app);
 
 // configure socket.io
 io.configure(function () {
+
+	io.set('log level', 1);
   
-  // recommended production testing
-  //io.enable('browser client minification');  // send minified client
-  //io.enable('browser client etag');          // apply etag caching logic based on version number
-  //io.enable('browser client gzip');          // gzip the file
-  
-  io.set('log level', 1); // reduce level of logging to warning only
-  
-  io.set('transports', [
-      'websocket'
-    , 'flashsocket'
-    , 'htmlfile'
-    , 'xhr-polling'
-    , 'jsonp-polling'
-  ]);
-  
-  
+	io.set('transports', [
+    	'websocket',
+    	'flashsocket',
+    	'htmlfile',
+    	'xhr-polling',
+    	'jsonp-polling'
+	]);
 });
 
 
 // configure express
 app.configure(function(){
-  app.set('views', __dirname + '/views');
-  app.set('view engine', 'ejs');
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(express.cookieParser());
-  app.use(express.session({ secret: 'your secret here' }));
-  app.use(app.router);
-  app.use(express.static(__dirname + '/public'));
+	app.set('views', __dirname + '/views');
+	app.set('view engine', 'ejs');
+	app.use(express.bodyParser());
+	app.use(express.methodOverride());
+	app.use(express.cookieParser());
+	app.use(express.session({ secret: 'your secret here' }));
+	app.use(app.router);
+	app.use(express.static(__dirname + '/public'));
 });
 
 app.configure('development', function(){
-  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+	app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
 app.configure('production', function(){
-  app.use(express.errorHandler());
+	app.use(express.errorHandler());
 });
 
 

@@ -13,57 +13,276 @@
 				if( navigator.userAgent.match( /(iPhone|iPad|iPod|Android)/i ) ) document.write( '<p style="color: rgba(0,0,0,0.3); text-shadow: none;">('+'Tap to navigate'+')</p>' );
 			</script>
 		</section>
-		
+
 		<section>
-			<h2>Slide 2</h2>
-			<p>
-				Please update slide 2 description here.
-			</p>
-			
+			<h2>Agenda</h2>
+			<ul>
+				<li> Online Services on Just Dance </li>
+				<li> Why this talk? </li>
+				<li> Node.js: What is it? </li>
+				<li> Traditional vs Event-based Concurrency Model </li>
+				<li> Moving to Node: Motivations </li>
+				<li> Moving to Node: Easy to integrate </li>
+				<li> Results (Achievements?) with Node </li>
+				<li> Development Methodology </li>
+				<li> Do's and Don'ts </li>
+				<li> Conclusion </li>
+			</ul>
 		</section>
 		
-		<!-- Example of nested vertical slides -->
 		<section>
+			<h2>Online Services on Just Dance</h2>
+
 			<section>
-				<h2>Vertical Slides</h2>
-				<p>
-					Slides can be nested inside of other slides,<br/>
-					try pressing <a href="#/2/1">down</a>.
-				</p>
-				<a href="#/2/1" class="image">
-					<img src="/images/arrow_down.png">
-				</a>
+				<p class="fragment"><strong> Before Node.js: </strong></sp>
+				<p><ul>
+					<li class="fragment"> Just Dance 3: DLC + Rich Content </li>
+					<li class="fragment"> Just Dance 4: DLC + Rich Content (moved to RDV) </li>
+					<li class="fragment"> Just Dance 2014: Introduced User Content, Soft Realtime Multiplayer  </li>
+					<li class="fragment"> Just Dance 2015: Added Online Leaderboards </li>
+					<p><li class="fragment"> Separate environment for each platform for each game </li></p>
+				</ul></p>
 			</section>
 			<section>
-				<h2>Basement Level 1</h2>
-				<p>Press down or up to navigate.</p>
-			</section>
-			<section>
-				<h2>Basement Level 2</h2>
-				<p>Description for basement 2</p>
-			</section>
-			<section>
-				<h2>Basement Level 3</h2>
-				<p>This is it, time to go back up.</p>
-				<a href="#/2" class="image">
-					<img src="/images/arrow_up.png">
-				</a>
+				<p><strong>After Node.js</strong></p>
+				<section>
+					<p><ul>
+						<li class="fragment"> Just Dance 2016: Game as a browser! 6 SKUs on a single server. Introduced Netflix-like subscription-streaming service, new UGCs types, online avatars, Dance Quests, asynchronous challenges... </li>
+						<li class="fragment"> Just Dance 2017: Cross-platform World Dance Floor, new async challenge service, seamless subscription trial </li> 
+						<li class="fragment"> Live ops improved: versioned content-management, BO improvements, server-side metrics... </li>
+						<p><li class="fragment"> Curently running on a single Node.js environment: 14 SKUs on 7 platforms from 2 games </li></p>
+					</ul></p>
+				</section>
 			</section>
 		</section>
 
 		<section>
-			<h2>Holistic Overview</h2>
-			<p>
-				Press <strong>ESC</strong> to enter the slide overview!
-			</p>
+			<h2> Why this Talk? </h2>
+			<p><ul>
+				<li class="fragment"> To share our experiences, of course! (2 years of experience in Node JS web-servers) </li>
+				<li class="fragment"> Build an internal talent pool of online devs </li>
+				<li class="fragment"> Node runtime suitable for desktop apps </li>
+				<p class="fragment"> ...even quadcopters! :D </p>
+				<li class="fragment"> May be of interest to tools teams (Yay!) </li>
+				<li class="fragment"> Node offers productivity and flexibility: Attractive for small productions </li>
+			</ul></p>
 		</section>
 
 		<section>
-			<h2>Works in Mobile Safari</h2>
-			<p>
-				Try it out! You can swipe through the slides pinch your way to the overview.
-			</p>
+			<h2>What is Node.js?</h2>
+
+			<section><p> It is NOT a Javascript framework. </p></section>
+
+			<section>
+				<p> It is a Runtime Environment using Javascript as a scripting language. </p>
+				<p class="fragment"> Node Exposes an event driven architecture leveraging asynchronous I/O </p>
+				<p class="fragment"> Designed to handle hundreds of thousands of connections in a server environment</p>
+			</section>
+
+			<section>
+				<p><img src="/images/eventloop.png"></p>
+			</section>
+
+			<section>
+				<p><img src="/images/eventloop2.jpg"></p>
+			</section>
+
+			<section>
+				<h4> Node runtime operates on a single-threaded event loop</h2>
+				<p><ul>
+					<li class="fragment"> Uses non-blocking I/O calls </li>
+					<li class="fragment"> Under the hood, Node uses libuv to handle asynchronous native OS events </li>
+					<li class="fragment"> Avoids the 1-thread-per-connection approach </li>
+					<li class="fragment"> Completely avoids context-switching between thousands of threads </li>
+					<li class="fragment"> Allows hundreds of thousands of concurrent connections </li>
+					<li class="fragment"> Each new connection only costs a small heap allocation and an event in the event queue </li>
+				</ul></p>
+			</section>
+
+			<section>
+				<h4> Google V8 Engine + an event loop using a low level API (libuv) + Javascript.</h2>
+				<p><ul>
+					<li class="fragment"> Uses non-blocking I/O calls </li>
+					<li class="fragment"> Under the hood, Node uses libuv to handle asynchronous native OS events </li>
+					<li class="fragment"> Avoids the 1-thread-per-connection approach </li>
+					<li class="fragment"> Completely avoids context-switching between thousands of threads </li>
+					<li class="fragment"> Allows hundreds of thousands of concurrent connections </li>
+					<li class="fragment"> Each new connection only costs a small heap allocation and an event in the event queue </li>
+				</ul></p>
+			</section>
+
+			<section>
+				<p><img src="/images/NodeJS_System.png"></p>
+			</section>
 		</section>
+
+		<section>
+			<h3>The Traditional Concurrency Model:</h2>
+			<p><ul>
+				<li class="fragment"> Spawn a thread per HTTP connection </li>
+				<li class="fragment"> Threads block on I/O </li>
+				<li class="fragment"> Context-switching is expensive! </li>
+				<li class="fragment"> Threads demand more RAM </li>
+				<li class="fragment"> Cost goes up with number of connections </li>
+				<li class="fragment"> It gets worse if I/O wait time increases </li>
+			</ul></p>
+		</section>
+
+		<section>
+			<h2>Node is efficient</h2>
+			<section>
+				<p><img src="/images/Node-EventDriven.jpg"></p>
+			</section>
+
+			<section>
+				<p><img src="/images/node-bench.png"></p>
+			</section>
+
+			<section>
+				<p><img src="/images/node-bench2.png"></p>
+			</section>
+
+			<section>
+				<ul>
+					<li class="fragment"> Does real-time well using the web-socket protocol</li>
+					<li class="fragment"> Built to handle data as streams </li>
+					<li class="fragment"> Runs in a process, scales seamlessly on the cloud </li>
+					<li class="fragment"> Scales on multiple CPU-cores with a process manager like PM2 </li>
+					<li class="fragment"> PM2 manages multiple node processes and restarts them if required </li>
+				<ul>
+			</section>
+		</section>
+
+		<section>
+			<h2>Moving to Node: Motivations</h2>
+
+			<section>
+				<h4>RDV was too expensive</h4>
+				<section>
+					<p><table class="fragment">
+						<thead>
+					    	<tr class="header">
+								<th style="text-align: left;">Game Version</th>
+								<th style="text-align: left;">RDV Version Upgrade</th>
+								<th style="text-align: left;">UpgradeType</th>
+								<th style="text-align: left;">UpgradeCost</th>
+					    	</tr>
+						</thead>
+						<tbody>
+							<tr class="odd">
+								<td style="text-align: left;">JD4</td>
+								<td style="text-align: left;">1.4 - 2.0</td>
+								<td style="text-align: left;">major upgrade</td>
+								<td style="text-align: left;">9MM</td>
+							</tr>
+							<tr class="even">
+								<td style="text-align: left;">JD2015</td>
+								<td style="text-align: left;">2.3 to 2.5</td>
+								<td style="text-align: left;">minor upgrade</td>
+								<td style="text-align: left;">2MM</td>
+							</tr>
+							<tr class="odd">
+								<td style="text-align: left;">JD2016</td>
+								<td style="text-align: left;">2.6 to 3.x</td>
+								<td style="text-align: left;">major + minor(s)</td>
+								<td style="text-align: left;">?</td>
+							</tr>
+						</tbody>
+					</table></p>
+				</section>
+
+				<section>
+					<ul>
+						<li class="fragment"> Using an RDV server requires game client to integrate a client SDK </li>
+						<li class="fragment"> Every Just Dance version needed an RDV upgrade </li>
+						<li class="fragment"> An server upgrade would require a client upgrade </li>
+						<li class="fragment"> ...and vice-versa... </li>
+					</ul>
+				</section>
+			</section>
+
+			<section>
+				<h4> RDV Server offered no visibility </h4>
+
+				<ul>
+					<li class="fragment"> No metrics available from the server </li>
+					<li class="fragment"> Server logs were difficult to retrieve </li>
+					<li class="fragment"> Server would stop logging if logs exceeded size limit (~100MB) </li>
+					<li class="fragment"> No centralized storage or filtering mechanism for logs </li>
+				</ul>
+			</section>
+
+			<section>
+				<h4> Tool support was lacking </h4>
+
+				<ul>
+					<li class="fragment"> Suboptimal MySQL queries generated by tools </li>
+					<li class="fragment"> Sandbox Manager website was slow; offered limited features </li>
+					<li class="fragment"> Client SDK tools did not integrate well into workflow </li>
+				</ul>
+			</section>
+
+			<section>
+				<h4> Overdependence on GNS </h4>
+				<p><img src="/images/online_sosit.png"></p>
+			</section>
+		</section>
+
+		<section>
+			<h2> Node.js was an attractive alternative </h2>
+
+			<section>
+				<h4> Node is good for web-services, tools, and real-time applications </h4>
+				<p><img src="/images/online_node1.png"></p>
+			</section>
+
+			<section>
+				<h4> HTTP is a standard protocol </h4>
+				<p><img src="/images/online_standard.png"></p>
+				<p><ul>
+					<li class="fragment"> Node exposes services over HTTP(S) </li>
+					<li class="fragment"> Tools, mobile apps, websites could directly talk to the server </li>
+					<li class="fragment"> On the game client, Ubiservices SDK offers a HTTP client lib </li>
+				</ul></p>
+			</section>
+
+			<section>
+				<h4> Open-Source! </h4>
+				<p><ul>
+					<li class="fragment"> Better documentation </li>
+					<li class="fragment"> Easier to find knowledgable progammers </li>
+					<p class="fragment"><img src="/images/online_jobs.png"></p>
+					<li class="fragment"> Support: Forums, Community, Google </li>
+					<p class="fragment"><img src="/images/online_google.png"></p>
+				</ul></p>
+			</section>
+
+			<section>
+				<h4> Dedicated Machines on Ubisoft Cloud Online </h4>
+
+				<p><img src="/images/online_uco.gif" style="max-height: 1280px; max-width: 960px;"></p>
+			</section>
+
+			<section>
+				<h4> Dedicated Machines on Ubisoft Cloud Online </h4>
+
+				<p><img src="/images/online_uco.gif" style="max-height: 1280px; max-width: 960px;"></p>
+			</section>
+		</section>
+
+		<section>
+			<h2> Moving to Node: Easy to integrate </h2>
+
+			<ul>
+				<li class="fragment"> Ubiservices provides a HTTP library </li>
+				<li class="fragment"> Our advise would be to write an async wrapper over UbiServices's HTTP </li>
+				<li class="fragment"> Use the Ubiticket for client session management and authentication </li>
+				<li class="fragment"> Set up a logging system: We use NxLog + Logstash + ElasticSearch </li>
+				<li class="fragment"> Set up a deployment system: We use Webistrano for now </li>
+				<p><li class="fragment"> Talk to us! It'll be <strong>much</strong> quicker! </li></p>
+			</ul>
+		</section>	
+
 
 	</div>
 
