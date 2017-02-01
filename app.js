@@ -10,7 +10,16 @@ var express = require('express')
 var app = module.exports = express.createServer();
 
 // socket io
-var io = require('socket.io');
+var io = require('socket.io')
+// ({
+//   transports: [
+//     'websocket',
+//     'flashsocket',
+//     'htmlfile',
+//     'xhr-polling',
+//     'jsonp-polling'
+//   ]
+// });
 
 // socket io setup
 io = io.listen(app);

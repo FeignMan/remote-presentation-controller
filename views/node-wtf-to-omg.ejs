@@ -23,9 +23,8 @@
 				<li> Traditional vs Event-based Concurrency Model </li>
 				<li> Moving to Node: Motivations </li>
 				<li> Moving to Node: Easy to integrate </li>
-				<li> Results (Achievements?) with Node </li>
+				<li> Results, Achievements </li>
 				<li> Development Methodology </li>
-				<li> Do's and Don'ts </li>
 				<li> Conclusion </li>
 			</ul>
 		</section>
@@ -49,8 +48,8 @@
 					<p><ul>
 						<li class="fragment"> Just Dance 2016: Game as a browser! 6 SKUs on a single server. Introduced Netflix-like subscription-streaming service, new UGCs types, online avatars, Dance Quests, asynchronous challenges... </li>
 						<li class="fragment"> Just Dance 2017: Cross-platform World Dance Floor, new async challenge service, seamless subscription trial </li> 
-						<li class="fragment"> Live ops improved: versioned content-management, BO improvements, server-side metrics... </li>
-						<p><li class="fragment"> Curently running on a single Node.js environment: 14 SKUs on 7 platforms from 2 games </li></p>
+						<li class="fragment"> Live ops improved: versioned content-management, Back Office improvements, server-side metrics... </li>
+						<p><li class="fragment"> Currently running on a single Node.js environment: 14 SKUs on 7 platforms from 2 games </li></p>
 					</ul></p>
 				</section>
 			</section>
@@ -102,12 +101,14 @@
 			<section>
 				<h4> Google V8 Engine + an event loop using a low level API (libuv) + Javascript.</h2>
 				<p><ul>
-					<li class="fragment"> Uses non-blocking I/O calls </li>
-					<li class="fragment"> Under the hood, Node uses libuv to handle asynchronous native OS events </li>
-					<li class="fragment"> Avoids the 1-thread-per-connection approach </li>
-					<li class="fragment"> Completely avoids context-switching between thousands of threads </li>
-					<li class="fragment"> Allows hundreds of thousands of concurrent connections </li>
-					<li class="fragment"> Each new connection only costs a small heap allocation and an event in the event queue </li>
+					<li class="fragment"> Node as a package contains an interpreter and a compiler taken from V8 </li>
+					<li class="fragment"> V8 is really fast; compiles JS to native code and caches </li>
+					<li class="fragment"> Core Node functionality exposed through built-in Javascript libraries </li>
+					<li class="fragment"> These core libraries allow access to stuff like the file system and networking from the Node environment </li>
+					<li class="fragment"> Uses C++ bindings to glue everything together and to the OS </li>
+					<li class="fragment"> JS great on the server: </li>
+					<p class="fragment"> Coming from the browser it's designed to handle events </p>
+					<p class="fragment"> Lambdas and closures are great for the async way! </p>
 				</ul></p>
 			</section>
 
@@ -262,12 +263,6 @@
 
 				<p><img src="/images/online_uco.gif" style="max-height: 1280px; max-width: 960px;"></p>
 			</section>
-
-			<section>
-				<h4> Dedicated Machines on Ubisoft Cloud Online </h4>
-
-				<p><img src="/images/online_uco.gif" style="max-height: 1280px; max-width: 960px;"></p>
-			</section>
 		</section>
 
 		<section>
@@ -281,9 +276,47 @@
 				<li class="fragment"> Set up a deployment system: We use Webistrano for now </li>
 				<p><li class="fragment"> Talk to us! It'll be <strong>much</strong> quicker! </li></p>
 			</ul>
-		</section>	
+		</section>
 
+		<section>
+			<h2> Development Methodologies </h2>
 
+			<section>
+				<p> TDD: Test Driven Development </p>
+				<ul>
+					<li class="fragment"> In fact, essential with Javascript development </li>
+					<li class="fragment"> Unit tests replace the compiler for syntax checking </li>
+					<li class="fragment"> Catch runtime crashes </li>
+					<li class="fragment"> Check application logic </li>
+				</ul>
+			</section>
+			<section>
+				<p> Continuous Integration </p>
+				<ul>
+					<li class="fragment"> Push to prod every week </li>
+					<li class="fragment"> Bug fixes deployed to prod continuously </li>
+					<li class="fragment"> Lower Risk: Roll often, roll small, roll back ;) </li>
+				</ul>
+			</section>
+		</section>
+
+		<section>
+			<h2> Results, Achievements </h2>
+
+			<ul>
+				<li class="fragment"> Faster development iteration </li>
+				<li class="fragment"> Managing 10 platforms with a small team </li>
+				<li class="fragment"> Cross-platform Multiplayer </li>
+				<li class="fragment"> Multiple game versions on the same servers </li>
+				<li class="fragment"> Shared user data between game versions and platforms </li>
+				<li class="fragment"> Lesser GNS tickets, more infrastrusture, automation </li>
+				<li class="fragment"> Team is empowered; Team-morale is high </li>
+			</ul>
+		</section>
+
+		<section>
+			<h2> Conclusions </h2>
+		</section>
 	</div>
 
 	<!-- The navigational controls UI -->
